@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Vite cache (if any)
+.vite/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
