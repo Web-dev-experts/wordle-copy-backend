@@ -19,9 +19,9 @@ const createSendToken = function (user, statusCode, res) {
 
   const cookieOptions = {
     httpOnly: true,
-    secure: false, // must be false in dev (localhost/http)
+    secure: true,
+    sameSite: 'none',
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    sameSite: 'lax',
   };
 
   res.cookie('jwt', token, cookieOptions);
@@ -60,8 +60,8 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.logout = (req, res) => {
   res.cookie('jwt', '', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax',
     expires: new Date(0),
   });
 
