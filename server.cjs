@@ -1,5 +1,5 @@
 require('dotenv').config({ path: './config.env' });
-const { createDailyGame } = require('../Front-end/src/api/createNewGame.cjs');
+const { createDailyGame } = require('./utils/createNewGame.cjs');
 
 const mongoose = require('mongoose');
 const app = require('./app.cjs');
