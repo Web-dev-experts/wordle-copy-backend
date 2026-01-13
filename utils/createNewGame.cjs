@@ -7,7 +7,6 @@ const pickRandomWord = async function () {
     );
     if (!res.ok) throw new Error("Could not fetch");
     const fetched = await res.json();
-    console.log(fetched);
     return fetched[0];
   } catch (error) {
     console.error(error);

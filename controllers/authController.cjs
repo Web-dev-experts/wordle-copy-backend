@@ -36,7 +36,6 @@ const createSendToken = function (user, statusCode, res) {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -52,7 +51,6 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!password || !email)
     return next(new AppError('Password or email is empty!', 400));
   const user = await User.findOne({ email }).select('+password');
-  console.log(!user || (await user.checkPasswords(password, user.password)));
   if (!user || !(await user.checkPasswords(password, user.password)))
     return next(new AppError('Email or password is incorrect!', 400));
 
@@ -173,13 +171,11 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     .createHash('sha256')
     .update(req.params.token)
     .digest('hex');
-  console.log(hashedToken);
 
   const user = await User.findOne({
     passwordResetToken: hashedToken,
     passwordResetExpiry: { $gt: Date.now() },
   }).select('+password');
-  console.log(user, hashedToken);
 
   if (!user) return next(new AppError('Token invalid or expired!'), 401);
 
