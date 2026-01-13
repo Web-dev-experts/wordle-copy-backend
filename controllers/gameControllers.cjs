@@ -27,6 +27,7 @@ exports.play = catchAsync(async function (req, res, next) {
     maxAttempts: game.maxAttempts,
     attempts: userGame.attempts,
     isFinished: userGame.isFinished,
+    isWon: userGame.isWon,
   });
 });
 
