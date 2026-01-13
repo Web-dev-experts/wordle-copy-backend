@@ -31,6 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Applying rate limit to avoid attacks
+app.set('trust proxy', 1);
+
 app.use('/api', limiter);
 
 // Applying XSS to sanitize
